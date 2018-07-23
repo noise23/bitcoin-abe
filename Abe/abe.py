@@ -68,27 +68,47 @@ DEFAULT_TEMPLATE = """
     <title>%(title)s</title>
 </head>
 <body>
-    <h1><a href="%(dotdot)s%(HOMEPAGE)s"><img
-     src="%(dotdot)s%(STATIC_PATH)slogo32.png" alt="Abe logo" /></a> %(h1)s
-    </h1>
+<div id="wrap">
+   <div id="content">
+
+<table border="0">
+  <tr>
+    <td class="noborder" width="300"><img src="%(dotdot)s%(STATIC_PATH)sexhead2.png" width="292" height="151"></td>
+    <td class="noborder">The Official Truckcoin<br>
+      Block Explorer</td>
+  </tr>
+</table>
+
+    <h1>%(h1)s</h1>
     %(body)s
-    <p><a href="%(dotdot)sq">API</a> (machine-readable pages)</p>
-    <p style="font-size: smaller">
+    <p>| <a href="%(dotdot)sq">API</a> (machine-readable pages) |  <a href="http://explorer.truckcoin.net/">Search</a> |  <a href="http://richlist.truckcoin.net/">Rich List</a> |  <a href="http://explorer.truckcoin.net/chain/TruckCoin">Home</a> |</p>
+
+<div class="centered">
+Truckcoin is a digital crypto-commodity which pays you 200&#37; interest per year.<br><br>
+<a href="http://truckcoin.net">Official Website</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="https://bitcointalk.org/index.php?topic=716182.0">Bitcointalk Thread</a>
+<br /><br /><br /><br />
+    <p class="copy">
+Copyright &copy; Truckcoin Developers <br /><br />
         <span style="font-style: italic">
             Powered by <a href="%(ABE_URL)s">%(APPNAME)s</a>
         </span>
         %(download)s
-        Tips appreciated!
-        <a href="%(dotdot)saddress/%(DONATIONS_BTC)s">BTC</a>
-        <a href="%(dotdot)saddress/%(DONATIONS_NMC)s">NMC</a>
     </p>
+
+</div>
+
+</div>
+</div>
 </body>
 </html>
 """
 
 DEFAULT_LOG_FORMAT = "%(message)s"
 
-DEFAULT_DECIMALS = 8
+LOG10COIN = 6
+COIN = 10 ** LOG10COIN
+
+DEFAULT_DECIMALS = 6
 
 # It is fun to change "6" to "3" and search lots of addresses.
 ADDR_PREFIX_RE = re.compile('[1-9A-HJ-NP-Za-km-z]{6,}\\Z')
@@ -287,7 +307,7 @@ class Abe:
         return getattr(abe, 'handle_' + cmd, None)
 
     def handle_chains(abe, page):
-        page['title'] = ABE_APPNAME + ' Search'
+        page['title'] = 'Truckcoin Blockchain Search'
         body = page['body']
         body += [
             abe.search_form(page),
