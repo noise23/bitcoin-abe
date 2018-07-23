@@ -50,7 +50,7 @@ CONFIG_DEFAULTS = {
     "commit_bytes":       None,
     "log_sql":            None,
     "log_rpc":            None,
-    "default_chain":      "Bitcoin",
+    "default_chain":      "Truckcoin",
     "datadir":            None,
     "ignore_bit8_chains": None,
     "use_firstbits":      False,
