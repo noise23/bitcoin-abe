@@ -85,7 +85,7 @@ DEFAULT_TEMPLATE = """
 
 <div class="centered">
 Truckcoin is a digital crypto-commodity which pays you 200&#37; interest per year.<br><br>
-<a href="http://truckcoin.net">Official Website</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="https://bitcointalk.org/index.php?topic=716182.0">Bitcointalk Thread</a>
+<a href="http://truckcoin.net">Official Website</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="https://bitcointalk.org/index.php?topic=2291875.0">Bitcointalk Thread</a>
 <br /><br /><br /><br />
     <p class="copy">
 Copyright &copy; Truckcoin Developers <br /><br />
