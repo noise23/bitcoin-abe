@@ -314,9 +314,6 @@ class Abe:
             '<table>\n',
             '<tr><th>Currency</th><th>Code</th><th>Block</th><th>Time</th>',
             '<th>Started</th><th>Age (days)</th><th>Coins Created</th>',
-            '<th>Avg Coin Age</th><th>',
-            '% <a href="https://en.bitcoin.it/wiki/Bitcoin_Days_Destroyed">',
-            'CoinDD</a></th>',
             '</tr>\n']
         now = time.time() - EPOCH1970
 
@@ -376,9 +373,7 @@ class Abe:
                     body += [
                         '<td>', format_time(started)[:10], '</td>',
                         '<td>', '%5g' % (chain_age / 86400.0), '</td>',
-                        '<td>', format_satoshis(satoshis, chain), '</td>',
-                        '<td>', avg_age, '</td>',
-                        '<td>', percent_destroyed, '</td>']
+                        '<td>', format_satoshis(satoshis, chain), '</td>']
 
             body += ['</tr>\n']
         body += ['</table>\n']
@@ -515,11 +510,8 @@ class Abe:
         body += ['<p>', nav, '</p>\n',
                  '<table><tr><th>Block</th><th>Approx. Time</th>',
                  '<th>Transactions</th><th>Value Out</th>',
-                 '<th>Difficulty</th><th>Outstanding</th>',
-                 '<th>Average Age</th><th>Chain Age</th>',
-                 '<th>% ',
-                 '<a href="https://en.bitcoin.it/wiki/Bitcoin_Days_Destroyed">',
-                 'CoinDD</a></th>',
+                 '<th>Difficulty</th><th>Total Supply</th>',
+                 '<th>Chain Age</th>',
                  ['<th>Satoshi-seconds</th>',
                   '<th>Total ss</th>']
                  if extra else '',
@@ -553,9 +545,7 @@ class Abe:
                 '</td><td>', format_satoshis(value_out, chain),
                 '</td><td>', util.calculate_difficulty(int(nBits)),
                 '</td><td>', format_satoshis(satoshis, chain),
-                '</td><td>', avg_age,
                 '</td><td>', '%5g' % (seconds / 86400.0),
-                '</td><td>', percent_destroyed,
                 ['</td><td>', '%8g' % ss,
                  '</td><td>', '%8g' % total_ss] if extra else '',
                 '</td></tr>\n']
@@ -629,22 +619,6 @@ class Abe:
             'Transactions: ', len(b['transactions']), '<br />\n',
             'Value out: ', format_satoshis(b['value_out'], chain), '<br />\n',
             'Transaction Fees: ', format_satoshis(b['fees'], chain), '<br />\n',
-
-            ['Average Coin Age: %6g' % (b['satoshi_seconds'] / 86400.0 / b['chain_satoshis'],),
-             ' days<br />\n']
-            if b['chain_satoshis'] and (b['satoshi_seconds'] is not None) else '',
-
-            '' if b['satoshis_destroyed'] is None else
-            ['Coin-days Destroyed: ',
-             format_satoshis(b['satoshis_destroyed'] / 86400.0, chain), '<br />\n'],
-
-            ['Cumulative Coin-days Destroyed: %6g%%<br />\n' %
-             (100 * (1 - float(b['satoshi_seconds']) / b['chain_satoshi_seconds']),)]
-            if b['chain_satoshi_seconds'] else '',
-
-            ['sat=',b['chain_satoshis'],';sec=',seconds,';ss=',b['satoshi_seconds'],
-             ';total_ss=',b['chain_satoshi_seconds'],';destroyed=',b['satoshis_destroyed']]
-            if abe.debug else '',
 
             '</p>\n']
 
